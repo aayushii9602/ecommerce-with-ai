@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "backend code for sasefied assessment",
+  "description": "backend code for implementing AI",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,11 +10,16 @@
   "author": "Aayushi",
   "license": "ISC",
   "dependencies": {
+    "@langchain/core": "^0.3.66",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mongoose": "^8.16.0",
+    "langchain": "^0.3.30",
+    "mongoose": "^8.15.0",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.10",
-    "uuid": "^11.1.0"
+    "openai": "^5.10.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.25.76"
   }
 }

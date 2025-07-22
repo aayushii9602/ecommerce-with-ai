@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import orderRoutes from "./src/route/orderRoutes.js"
-import productRoutes from "./src/route/productRoutes.js"
+import orderRoutes from "./src/route/orderRoutes.js";
+import productRoutes from "./src/route/productRoutes.js";
+import chatRoutes from "./src/route/chatRoutes.js";
 import connectDB from "./src/db/dbConfig.js";
 import cors from "cors";
 
@@ -22,5 +23,7 @@ connectDB();
 app.use("/api/v1/order", orderRoutes);
 
 app.use("/api/v1/product", productRoutes);
+
+app.use("/api/v1/chat", chatRoutes);
 
 export default app;
