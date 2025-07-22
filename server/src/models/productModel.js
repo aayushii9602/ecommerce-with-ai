@@ -16,4 +16,13 @@ const ProductSchema = new mongoose.Schema({
   oversell: { type: Boolean, default: false },
 });
 
+export const findProductsByQuery = async (query = "") => {
+  // console.log("in find product by query function");
+  return await productModel
+    .find({
+      productName: { $regex: query, $options: "i" },
+    })
+    .limit(10);
+};
+
 export const productModel = mongoose.model("Product", ProductSchema);

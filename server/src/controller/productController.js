@@ -1,13 +1,11 @@
 import { productModel } from "../models/productModel.js";
-
+import { findProductsByQuery } from "../models/productModel.js";
 export default async function searchProducts(req, res) {
   try {
     const q = req.query.q || "";
-    const products = await productModel
-      .find({
-        productName: { $regex: q, $options: "i" },
-      })
-      .limit(10);
+    const products = await findProductsByQuery(q);
+    console.log("QUERY:", q);
+    console.log("RES", products);
     res.json(products);
   } catch (err) {
     res
