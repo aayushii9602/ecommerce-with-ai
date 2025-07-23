@@ -64,3 +64,42 @@ export const placeOrderTool = new DynamicTool({
     }
   },
 });
+
+export const getOrderByIdTool = new DynamicTool({
+  name: "getOrderById",
+  description: "Fetch the details of an order using its order ID",
+  schema: z.object({
+    order_id: z.string().describe("The ID of the order to retrieve"),
+  }),
+  func: async (order_id) => {
+    try {
+      const response = await fetch(
+        `http://${process.env.HOST}:${process.env.PORT}/api/v1/order/${order_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch order");
+      }
+      return `
+      ✅ Order Details:
+      • Order ID: ${data.orderId}
+      • Product ID: ${data.item_id._id || data.item_id}
+      • Quantity: ${data.quantity}
+      • Seller: ${data.seller_name}
+      • Status: ${data.status}
+      • Expected Delivery: ${data.expectedDelivery}
+      • Actual Delivery: ${data.actualDelivery}
+      `.trim();
+    } catch (err) {
+      return `❌ Error fetching order: ${err.message}`;
+    }
+  },
+});

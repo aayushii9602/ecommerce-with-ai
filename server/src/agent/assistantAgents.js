@@ -1,10 +1,14 @@
 import { ChatOpenAI } from "@langchain/openai";
-import { searchProductTool, placeOrderTool } from "../tools/productTools.js";
+import {
+  searchProductTool,
+  placeOrderTool,
+  getOrderByIdTool,
+} from "../tools/productTools.js";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { createToolCallingAgent } from "langchain/agents";
 import { AgentExecutor } from "langchain/agents";
 
-const tools = [searchProductTool, placeOrderTool];
+const tools = [searchProductTool, placeOrderTool, getOrderByIdTool];
 const prompt = ChatPromptTemplate.fromMessages([
   ["system", "You are a helpful ecommerce assistant"],
   ["placeholder", "{chat_history}"],
@@ -20,8 +24,9 @@ export async function runAssistant(userMessage) {
   const agentExecutor = new AgentExecutor({
     agent,
     tools,
-    maxIterations: 3,
+    maxIterations: 2,
   });
   const response = await agentExecutor.invoke({ input: userMessage });
+
   return response.output;
 }
