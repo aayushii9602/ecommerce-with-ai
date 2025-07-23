@@ -13,7 +13,7 @@ const MessageSchema = new mongoose.Schema({
 });
 
 const ChatSchema = new mongoose.Schema({
-  chatId: {
+  _id: {
     type: String,
     required: true,
     unique: true,
