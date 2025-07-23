@@ -17,11 +17,9 @@ export const searchProductTool = new DynamicTool({
     input: z.string().describe("Search query"),
   }),
   func: async (input) => {
-    console.log("in search tool", input);
-    // return "hi";
+    // console.log("in search tool", input);
     const products = await findProductsByQuery(input);
-    console.log("products", products);
-    return JSON.stringify(products);
+    return products;
   },
 });
 
@@ -57,7 +55,12 @@ export const placeOrderTool = new DynamicTool({
         throw new Error(data.message || "Order placement failed");
       }
 
-      return `Order placed successfully. Order ID: ${data._id}, Expected Delivery: ${data.expected_delivery}`;
+      // return `Order placed successfully. Order ID: ${data._id}, Expected Delivery: ${data.expected_delivery}`;
+      return {
+        status: "success",
+        order_id: data._id,
+        expected_delivery: data.expected_delivery,
+      };
     } catch (error) {
       console.error("Error placing order:", error.message);
       return `Failed to place order: ${error.message}`;
@@ -88,16 +91,16 @@ export const getOrderByIdTool = new DynamicTool({
       if (!response.ok) {
         throw new Error(data.message || "Failed to fetch order");
       }
-      return `
-      ✅ Order Details:
-      • Order ID: ${data.orderId}
-      • Product ID: ${data.item_id._id || data.item_id}
-      • Quantity: ${data.quantity}
-      • Seller: ${data.seller_name}
-      • Status: ${data.status}
-      • Expected Delivery: ${data.expectedDelivery}
-      • Actual Delivery: ${data.actualDelivery}
-      `.trim();
+      // console.log("DATA", data);
+      return {
+        order_id: data.orderId,
+        product_id: data.item_id._id || data.item_id,
+        quantity: data.quantity,
+        seller: data.seller_name,
+        status: data.status,
+        expected_delivery: data.expectedDelivery,
+        actual_delivery: data.actualDelivery,
+      };
     } catch (err) {
       return `❌ Error fetching order: ${err.message}`;
     }
