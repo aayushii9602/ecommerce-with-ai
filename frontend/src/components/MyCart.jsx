@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-const PORT = process.env.BACKEND_PORT
-const HOST = process.env.HOST
+// const BACKEND_PORT = process.env.BACKEND_PORT
+// const HOST = process.env.HOST
+const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT;
+const HOST = import.meta.env.VITE_HOST;
 const MyCart = ({ cartItems, cartQuantities, onRemoveItem }) => {
   const [loading, setLoading] = useState(false);
   const userId = "60d0fe4f5311236168a109cb"; // Hardcoded user ID
