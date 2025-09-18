@@ -58,7 +58,7 @@ const Dashboard = () => {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
-      <h2>{showCart ? "🧺 My Cart" : "📦 Product Dashboard"}</h2>
+      <h2>{showCart ? "My Cart" : "Product Catalog"}</h2>
 
       <button
         onClick={toggleCart}
@@ -72,7 +72,7 @@ const Dashboard = () => {
           cursor: "pointer",
         }}
       >
-        {showCart ? "➕ Add More Items" : `🧺 View Cart (${cartItems.length})`}
+        {showCart ? "Add More Items" : `View Cart (${cartItems.length})`}
       </button>
 
       {/* Cart View */}
@@ -98,14 +98,14 @@ const Dashboard = () => {
           {products.length > 0 ? (
             <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "1rem" }}>
               <thead>
-                <tr style={{ backgroundColor: "#f4f4f4" }}>
-                  <th style={thStyle}></th>
-                  <th style={thStyle}>Product Name</th>
-                  <th style={thStyle}>Supplier</th>
-                  <th style={thStyle}>Available</th>
-                  <th style={thStyle}>Price ($)</th>
-                  <th style={thStyle}>Oversell</th>
-                  <th style={thStyle}>Add to Cart</th>
+                <tr style={headerRow}>
+                  <th style={thStyle}> </th>
+                  <th style={thStyle}>Product</th>
+                  <th style={thStyle}>Supplier / Brand</th>
+                  <th style={thStyle}>In Stock</th>
+                  <th style={thStyle}>Price (USD)</th>
+                  <th style={thStyle}>Backorder Allowed</th>
+                  <th style={thStyle}>Quantity</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,5 +173,9 @@ const tdStyle = {
   padding: "10px",
   borderBottom: "1px solid #eee",
 };
+const headerRow = { backgroundColor: "#f1f1f1" };
+const rowEven = { backgroundColor: "#fff" };
+const rowOdd = { backgroundColor: "#f9f9f9" };
+
 
 export default Dashboard;

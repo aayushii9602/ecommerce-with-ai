@@ -59,7 +59,7 @@ const MyCart = ({ cartItems, cartQuantities, onRemoveItem }) => {
         maxWidth: "600px",
       }}
     >
-      <h3 style={{ marginBottom: "1rem" }}>🧺 My Cart</h3>
+      <h3 style={{ marginBottom: "1rem" }}>My Cart</h3>
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>

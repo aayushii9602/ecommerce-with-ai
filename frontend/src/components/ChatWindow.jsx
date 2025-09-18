@@ -17,7 +17,6 @@ const ChatWindow = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // API Configuration
 const BACKEND_PORT = import.meta.env.VITE_BACKEND_PORT;
 const HOST = import.meta.env.VITE_HOST;
 
@@ -151,8 +150,15 @@ const HOST = import.meta.env.VITE_HOST;
                     if (product.oversell) messageText += `   ✓ Oversell available\n`;
                     messageText += '\n';
                   });
-                } else {
-                  messageText = msg.content;
+                } else if(parsedContent.order_details) {
+                    console.log("msg.conetent",msg.content)
+                    const order_details=parsedContent.order_details;
+                messageText += `Hello 👋, I found your order details. Your order Id  ${order_details.order_id}.The current status of your order is ${order_details.status}. Would you like me to help you with tracking this order or making any changes to it?`;
+
+                console.log("messageText",messageText)
+                }
+                else{
+                    messageText=msg.content
                 }
               } catch (e) {
                 messageText = msg.content;
